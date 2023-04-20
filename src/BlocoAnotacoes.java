@@ -18,31 +18,44 @@ public class BlocoAnotacoes {
         this.anotacao.add(anotacao);
     }
 
-    public String buscarTitulo(String titutlo){
+    public Anotacao buscarTitulo(String titutlo){
 
-        String aux="";
+        Anotacao nota= null;
         for(Anotacao anotacoes : anotacao){
-         if(titutlo.compareTo(anotacoes.getTitulo())==0)
-                aux = "\nTitulo:  "+anotacoes.getTitulo()+"\n"+"\nTexto: "
-                        +"\n"+anotacoes.getTexto()+"\n"+"\nData de criacao: "+anotacoes.getData();
+            if(titutlo.compareTo(anotacoes.getTitulo())==0)
+                nota = anotacoes;
         }
 
-        if(!aux.equals(""))
-            return aux;
+        if(nota!=null)
+            return nota;
         else
-            return "Titulo Nao encontrado";
+            return null;
     }
 
     public boolean criarDiretorio(String nome){
 
-       File diretorio =  new File("C:\\Users\\thale\\Desktop",nome);
-       if(!diretorio.exists())
-       {
-           diretorio.mkdir();
-           return true;
-       }
-       else
-           return false;
+        File diretorio =  new File("C:\\Users\\thale\\Desktop",nome);
+        if(!diretorio.exists())
+        {
+            diretorio.mkdir();
+            return true;
+        }
+        else
+            return false;
+
+    }
+
+    public boolean deletar(Anotacao nota){
+
+        int pos = anotacao.indexOf(nota);
+
+        if(pos!=-1)
+        {
+            anotacao.remove(pos);
+            return true;
+        }
+        else
+            return false;
 
     }
     public void armazenar(String nome){
